@@ -18,14 +18,6 @@
   src: https://github.com/alvistack/ansible-role-python
   version: develop
 
-- name: apt
-  src: https://github.com/alvistack/ansible-role-apt
-  version: develop
-
-- name: yum
-  src: https://github.com/alvistack/ansible-role-yum
-  version: develop
-
-- name: java
-  src: https://github.com/alvistack/ansible-role-java
+- name: openjdk
+  src: https://github.com/alvistack/ansible-role-openjdk
   version: develop

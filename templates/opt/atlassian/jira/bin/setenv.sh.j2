@@ -3,8 +3,8 @@
 #
 # One way to set the JIRA HOME path is here via this variable.  Simply uncomment it and set a valid path like /jira/home.  You can of course set it outside in the command terminal.  That will also work.
 #
-JIRA_HOME="${JIRA_HOME:-"/var/atlassian/application-data/jira"}"
-JIRA_CATALINA="${JIRA_CATALINA:-"/opt/atlassian/jira"}"
+JIRA_HOME="${JIRA_HOME:-"{{ jira_home }}"}"
+JIRA_CATALINA="${JIRA_CATALINA:-"{{ jira_catalina }}"}"
 
 #
 #  Occasionally Atlassian Support may recommend that you set some specific JVM arguments.  You can use this variable below to do that.
@@ -20,7 +20,7 @@ JVM_MAXIMUM_MEMORY="${JVM_MAXIMUM_MEMORY:-"{{ jira_jvm_maximum_memory }}"}"
 #
 # The following setting configures the size of JVM code cache.  A high value of reserved size allows Jira to work with more installed apps.
 #
-JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=32m -XX:ReservedCodeCacheSize=512m'
+JVM_CODE_CACHE_ARGS='-XX:ReservedCodeCacheSize=512m -XX:+UseCodeCacheFlushing'
 
 #
 # The following are the required arguments for JIRA.
@@ -42,7 +42,7 @@ JVM_REQUIRED_ARGS='-Djava.awt.headless=true -Datlassian.standalone=JIRA -Dorg.ap
 # Prevents the JVM from suppressing stack traces if a given type of exception
 # occurs frequently, which could make it harder for support to diagnose a problem.
 #-----------------------------------------------------------------------------------
-JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow -Dcatalina.connector.scheme=${CATALINA_CONNECTOR_SCHEME:-"{{ jira_catalina_connector_scheme }}"} -Dcatalina.connector.secure=${CATALINA_CONNECTOR_SECURE:-"{{ jira_catalina_connector_secure }}"} -Dcatalina.connector.proxyName=${CATALINA_CONNECTOR_PROXYNAME:-"{{ jira_catalina_connector_proxyname }}"} -Dcatalina.connector.proxyPort=${CATALINA_CONNECTOR_PROXYPORT:-"{{ jira_catalina_connector_proxyport }}"} -Dcatalina.context.path=${CATALINA_CONTEXT_PATH:-"{{ jira_catalina_context_path }}"}"
+JVM_EXTRA_ARGS="-XX:-OmitStackTraceInFastThrow -Djava.locale.providers=COMPAT -Dcatalina.connector.scheme=${CATALINA_CONNECTOR_SCHEME:-"{{ jira_catalina_connector_scheme }}"} -Dcatalina.connector.secure=${CATALINA_CONNECTOR_SECURE:-"{{ jira_catalina_connector_secure }}"} -Dcatalina.connector.proxyName=${CATALINA_CONNECTOR_PROXYNAME:-"{{ jira_catalina_connector_proxyname }}"} -Dcatalina.connector.proxyPort=${CATALINA_CONNECTOR_PROXYPORT:-"{{ jira_catalina_connector_proxyport }}"} -Dcatalina.context.path=${CATALINA_CONTEXT_PATH:-"{{ jira_catalina_context_path }}"}"
 
 PRGDIR=`dirname "$0"`
 cat "${PRGDIR}"/jirabanner.txt
@@ -68,7 +68,7 @@ export JAVA_OPTS
 # !INSTALLER SET JAVA_HOME
 
 echo ""
-echo "If you encounter issues starting or stopping JIRA, please see the Troubleshooting guide at http://confluence.atlassian.com/display/JIRA/Installation+Troubleshooting+Guide"
+echo "If you encounter issues starting or stopping JIRA, please see the Troubleshooting guide at https://docs.atlassian.com/jira/jadm-docs-083/Troubleshooting+installation"
 echo ""
 if [ "$JIRA_HOME_MINUSD" != "" ]; then
     echo "Using JIRA_HOME:       $JIRA_HOME"
